@@ -1,0 +1,9 @@
+{"action" : "vacants gauss",
+"input" : "input/pure.sinw", 
+"output" : "nano_data.sinw",
+"probabilities_file" : "input/probabilities.txt",
+"num_files": "100",
+"mean": "100",
+"sigma": "5",
+"amplitude": "1.5"
+}	

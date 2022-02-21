@@ -1,0 +1,6 @@
+{"action" : "vacants radio",
+"input" : "input/pure.sinw", 
+"output" : "nano_data_radio.sinw",
+"probabilities_file" : "input/probabilities_radio.txt",
+"num_files": "5"
+}	
