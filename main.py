@@ -4,6 +4,7 @@ from aux.create_material import create_material
 from aux.create_vacants import create_vacants
 from aux.create_vacants import create_vacants_gaussian
 from aux.create_vacants import create_vacants_radio
+from aux.create_vacants import create_vacants_number
 
 with open (sys.argv[1], 'r') as file:
 	f = json.load(file)
@@ -20,6 +21,10 @@ elif f['action'] == 'vacants gauss':
 	
 elif f['action'] == 'vacants radio':
 	create_vacants_radio(f['probabilities_file'], f['input'], f['output'], int(f['num_files']))
+	
+elif f['action'] == 'vacants number':
+	create_vacants_number(f['probabilities_file'], f['input'], f['output'], int(f['num_files']))
+		
 		
 else:
 	print("No action in database \n")

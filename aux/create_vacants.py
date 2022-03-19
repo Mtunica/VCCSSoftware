@@ -4,6 +4,8 @@ from aux.vacants import vacants_obtained
 from aux.vacants import vacants_creation_gaussian
 from aux.vacants import vacants_creation_radio
 from aux.vacants import vacants_obtained_radio
+from aux.vacants import vacants_creation_number
+from aux.vacants import vacants_obtained_number
 
 from aux.mu import compute_mu
 
@@ -84,5 +86,25 @@ def create_vacants_radio(probabilities_file, input_file, output_file,num_files):
 		new_elements.clear()
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
 		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element_radio_"+str(i)+".xyz" )
+	stop = timeit.default_timer()
+	print('Time: ', stop - start) 
+	
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+def create_vacants_number(probabilities_file, input_file, output_file,num_files):
+	
+	#We want to compute time as well
+	start = timeit.default_timer()
+	
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+
+		vacants_creation_number(input_file, num, "output/"+str(i)+output_file)
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element_number_"+str(i)+".xyz" )
 	stop = timeit.default_timer()
 	print('Time: ', stop - start) 
