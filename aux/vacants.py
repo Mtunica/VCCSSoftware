@@ -520,10 +520,12 @@ def vacants_creation_number(filename, number_new_atoms, output_file):
 				z_.append(float(z))
 				potential_.append(float(pot))
 				inside.append(True)				
-		
-	for i in range(int(number_new_atoms)):
-		rand_num=random.randint(0, count)
-		
+	
+	random_sample = random.sample(range(count), int(number_new_atoms))
+	
+	
+	for rand_num in random_sample:
+
 		inside[rand_num]=False
 				
 	#Print in an output File.				

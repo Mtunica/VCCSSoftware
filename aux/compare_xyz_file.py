@@ -105,7 +105,7 @@ def comprare_xyz_file(filename1,filename2,filename_out):
 	fig = PLT.figure()
 	ax1 = fig.add_subplot(111)
 
-	n, bins, patches = ax1.hist(v_hist, bins=500, normed=1, facecolor='green')
+	n, bins, patches = ax1.hist(v_hist, bins=500, density=True, stacked=True, facecolor='green')
 	PLT.savefig(filename_out+"image.png")
 
 			
