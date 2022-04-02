@@ -1,6 +1,6 @@
 {"action" : "vacants number",
-"input" : "input/pure_120.sinw", 
+"input" : "input/pure_150.sinw", 
 "output" : "nano_data_number.sinw",
 "probabilities_file" : "input/probabilities_number.txt",
-"num_files": "3"
+"num_files": "6"
 }	

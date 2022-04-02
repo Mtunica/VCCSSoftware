@@ -539,7 +539,7 @@ def vacants_creation_number(filename, number_new_atoms, output_file):
 		fileout1.write("\n")
 		fileout1.write("-59.91928        59.91926 xlo xhi\n")
 		fileout1.write("-58.77384        58.77382 ylo yhi\n")
-		fileout1.write("0.0        1194.5496 zlo zhi\n")
+		fileout1.write("0.0        1495.53841 zlo zhi\n")
 		fileout1.write("\n")
 		
 		fileout1.write("Masses\n")
