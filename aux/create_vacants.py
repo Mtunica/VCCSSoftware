@@ -1,11 +1,13 @@
 import sys
 from aux.vacants import vacants_creation_xyz
-from aux.vacants import vacants_obtained
+from aux.obtained.obtained_vacants import vacants_obtained
 from aux.vacants import vacants_creation_gaussian
 from aux.vacants import vacants_creation_radio
-from aux.vacants import vacants_obtained_radio
+from aux.obtained.obtained_vacants import vacants_obtained_radio
 from aux.vacants import vacants_creation_number
-from aux.vacants import vacants_obtained_number
+from aux.obtained.obtained_vacants import vacants_obtained_number
+from aux.gaussian_number import vacants_gaussian_number
+
 
 from aux.mu import compute_mu
 
@@ -17,16 +19,17 @@ from aux.compute_radio_prob import compute_Radio_prob
 
 import timeit
 
-
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
 def create_vacants (probabilities_file, input_file, output_file,num_files):
-	
+
 	#We want to compute time as well
 	start = timeit.default_timer()
-	
+
 	#Define element and probabilities vector
 	new_elements=[]
 	probabilities = []
-	
+
 	for i in range(num_files):
 		new_elements, probabilities = vacants_obtained(probabilities_file,i)
 		print(probabilities)
@@ -34,18 +37,15 @@ def create_vacants (probabilities_file, input_file, output_file,num_files):
 		probabilities.clear()
 		new_elements.clear()
 	stop = timeit.default_timer()
-	print('Time: ', stop - start) 
+	print('Time: ', stop - start)
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
 def create_vacants_gaussian (probabilities_file, input_file, output_file,num_files,sigma, amplitude):
-	
+
 	#We want to compute time as well
 	start = timeit.default_timer()
-	
+
 	#Define element and probabilities vector
 	new_elements=[]
 	probabilities = []
@@ -60,18 +60,38 @@ def create_vacants_gaussian (probabilities_file, input_file, output_file,num_fil
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
 		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
 	stop = timeit.default_timer()
-	print('Time: ', stop - start) 
+	print('Time: ', stop - start)
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
-#**********************************************************************************************************************************
+def create_vacants_gaussian_number(probabilities_file, input_file, output_file,num_files,sigma, amplitude,length):
+
+	#Time computing
+	start = timeit.default_timer()
+
+	#Define element and probabilities vector
+
+	x0,y0=compute_mu(input_file)
+	print("x0:", x0, "y0:", y0)
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+		vacants_gaussian_number(input_file, num, "output/"+str(i)+output_file,x0,y0,sigma,amplitude,length)
+
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
+
+	#Time computing
+	stop = timeit.default_timer()
+	print('Time: ', stop - start)
+
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
 def create_vacants_radio(probabilities_file, input_file, output_file,num_files):
-	
+
 	#We want to compute time as well
 	start = timeit.default_timer()
-	
+
 	#Define element and probabilities vector
 	new_elements=[]
 	probabilities = []
@@ -87,18 +107,15 @@ def create_vacants_radio(probabilities_file, input_file, output_file,num_files):
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
 		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element_radio_"+str(i)+".xyz" )
 	stop = timeit.default_timer()
-	print('Time: ', stop - start) 
-	
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
+	print('Time: ', stop - start)
+
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
 def create_vacants_number(probabilities_file, input_file, output_file,num_files):
-	
+
 	#We want to compute time as well
 	start = timeit.default_timer()
-	
+
 	for i in range(num_files):
 		num = vacants_obtained_number(probabilities_file,i)
 
@@ -107,4 +124,4 @@ def create_vacants_number(probabilities_file, input_file, output_file,num_files)
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
 		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element_number_"+str(i)+".xyz" )
 	stop = timeit.default_timer()
-	print('Time: ', stop - start) 
+	print('Time: ', stop - start)

@@ -1,7 +1,7 @@
 #===============================================================================================================
 #===============================================================================================================
 #vacants.py.....................................................................................................
-#===============================================================================================================	
+#===============================================================================================================
 #===============================================================================================================
 #import libraries
 import pandas as pd
@@ -18,18 +18,18 @@ def vacants_creation_xyz(filename, probability, new_element, output_file):
 #...............................................................................................................
 #Security comprovations
 	#Emergency exit for total probability bigger than 1
-	if sum(probability)>1: 
+	if sum(probability)>1:
 		print("ERROR:Probability higer than 1")
 		exit() #Stop program
 #===============================================================================================================
-#Variable declaration		
+#Variable declaration
 	x_ = []
 	y_ = []
 	z_ = []
 	count_=[]
 	symbol_=[]
 	potential_=[]
-	 #Array xyz_coordinates = atomic symbol, x, y, z	
+	 #Array xyz_coordinates = atomic symbol, x, y, z
 	num_atoms = [] #Number of new_elements on the file
 	num_atoms=[0 for i in range(len(new_element))]
 	probability_calculation = []
@@ -41,7 +41,7 @@ def vacants_creation_xyz(filename, probability, new_element, output_file):
 #===============================================================================================================
 #
 #===============================================================================================================
-	
+
 	#Open Filename with the original list of elements.
 	with open(filename, "r") as file:
 		#Reading the original File.
@@ -50,49 +50,49 @@ def vacants_creation_xyz(filename, probability, new_element, output_file):
 			#Taking the number of atoms for the Filename
 			if line_number == 0:
 				num_atoms_total = int(line)  #Will use num_atoms afterward.
-			
-			#Taking the charge of the atoms for the Filename	
+
+			#Taking the charge of the atoms for the Filename
 			elif line_number == 1:
-				if "charge=" in line:			
-					charge = int(line.split("=")[1])		
+				if "charge=" in line:
+					charge = int(line.split("=")[1])
 				else:
 					charge = 0
-				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.		
+				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.
 			else:
 				#Reading from original File.
-				num, atomic_symbol, x, y, z, pot = line.split() 
+				num, atomic_symbol, x, y, z, pot = line.split()
 				element_change = False
-				random_number = random.random() 
-				
+				random_number = random.random()
+
 				for i in range(len(new_element)):
-					#Aplication of probability	
-					
-								
+					#Aplication of probability
+
+
 					if  ((random_number <= probability_calculation[i+1]) and (random_number > probability_calculation[i])) :
 						num_atoms[i] = num_atoms[i] + 1
-						element_change = True	
-							
+						element_change = True
+
 						if new_element[i] == "void":
 							break
 						else:
 							count+=1
-							count_.append(count) 
+							count_.append(count)
 							symbol_.append(new_element[i])
 							x_.append(float(x))
 							y_.append(float(y))
 							z_.append(float(z))
 							potential_.append(float(pot))
 							break
-									
+
 				if element_change == False:
 					count+=1
-					count_.append(count) 
+					count_.append(count)
 					symbol_.append(atomic_symbol)
 					x_.append(float(x))
 					y_.append(float(y))
 					z_.append(float(z))
 					potential_.append(float(pot))
-			
+
 #===============================================================================================================
 #===============================================================================================================
 #Calculus of the numbers
@@ -103,11 +103,11 @@ def vacants_creation_xyz(filename, probability, new_element, output_file):
 			fileout2.write(str(new_element[i])+ " " + str(num_atoms[i]) + " " + str(probability[i]) + " " + str(num_atoms[i]/num_atoms_total)+ "\n")
 			if (new_element[i] == "void"):
 				num_atoms_delete+=num_atoms[i]
-			
+
 			fileout2.write("\n\n")
 #===============================================================================================================
 #===============================================================================================================
-		#Print in an output File.				
+		#Print in an output File.
 		with open(output_file, "w") as fileout1:
 			#Writing number of atoms.
 			fileout1.write("LAMMPS 	coordinates with atom_style = atomic\n")
@@ -120,17 +120,17 @@ def vacants_creation_xyz(filename, probability, new_element, output_file):
 			fileout1.write("-58.77384        58.77382 ylo yhi\n")
 			fileout1.write("0.0        893.5607 zlo zhi\n")
 			fileout1.write("\n")
-		
+
 			fileout1.write("Masses\n")
 			fileout1.write("\n")
 			fileout1.write("1 28.0855\n")
 			fileout1.write("\n")
 			fileout1.write("Atoms\n")
 			fileout1.write("\n")
-			
+
 			for aaa in range(len(x_)):
 				fileout1.write("{:8d} {} {:12.5f} {:12.5f} {:12.5f} {:12.3f} \n".format(count_[aaa],symbol_[aaa],x_[aaa],y_[aaa],z_[aaa],potential_[aaa]))
-		
+
 		return
 #===============================================================================================================
 #===============================================================================================================
@@ -143,18 +143,18 @@ def vacants_creation_radio(filename, probability, new_element, output_file,radio
 #...............................................................................................................
 #Security comprovations
 	#Emergency exit for total probability bigger than 1
-	if sum(probability)>1: 
+	if sum(probability)>1:
 		print("ERROR:Probability higer than 1")
 		exit() #Stop program
 #===============================================================================================================
-#Variable declaration		
+#Variable declaration
 	x_ = []
 	y_ = []
 	z_ = []
 	count_=[]
 	symbol_=[]
 	potential_=[]
-	 #Array xyz_coordinates = atomic symbol, x, y, z	
+	 #Array xyz_coordinates = atomic symbol, x, y, z
 	num_atoms = [] #Number of new_elements on the file
 	num_atoms=[0 for i in range(len(new_element))]
 	probability_calculation = []
@@ -166,7 +166,7 @@ def vacants_creation_radio(filename, probability, new_element, output_file,radio
 #===============================================================================================================
 #
 #===============================================================================================================
-	
+
 	#Open Filename with the original list of elements.
 	with open(filename, "r") as file:
 		#Reading the original File.
@@ -175,50 +175,50 @@ def vacants_creation_radio(filename, probability, new_element, output_file,radio
 			#Taking the number of atoms for the Filename
 			if line_number == 0:
 				num_atoms_total = int(line)  #Will use num_atoms afterward.
-			
-			#Taking the charge of the atoms for the Filename	
+
+			#Taking the charge of the atoms for the Filename
 			elif line_number == 1:
-				if "charge=" in line:			
-					charge = int(line.split("=")[1])		
+				if "charge=" in line:
+					charge = int(line.split("=")[1])
 				else:
 					charge = 0
-				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.		
+				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.
 			else:
 				#Reading from original File.
-				num, atomic_symbol, x, y, z, pot = line.split() 
+				num, atomic_symbol, x, y, z, pot = line.split()
 				element_change = False
-				random_number = random.random() 
-				
+				random_number = random.random()
+
 				for i in range(len(new_element)):
-					#Aplication of probability	
-					
-					distance = np.sqrt((float(x)-x0)*(float(x)-x0)+(float(y)-y0)*(float(y)-y0)) 
-								
+					#Aplication of probability
+
+					distance = np.sqrt((float(x)-x0)*(float(x)-x0)+(float(y)-y0)*(float(y)-y0))
+
 					if  ((random_number <= probability_calculation[i+1]) and (random_number > probability_calculation[i]) and distance < radio[i]) :
 						num_atoms[i] = num_atoms[i] + 1
-						element_change = True	
-							
+						element_change = True
+
 						if new_element[i] == "void":
 							break
 						else:
 							count+=1
-							count_.append(count) 
+							count_.append(count)
 							symbol_.append(new_element[i])
 							x_.append(float(x))
 							y_.append(float(y))
 							z_.append(float(z))
 							potential_.append(float(pot))
 							break
-									
+
 				if element_change == False:
 					count+=1
-					count_.append(count) 
+					count_.append(count)
 					symbol_.append(atomic_symbol)
 					x_.append(float(x))
 					y_.append(float(y))
 					z_.append(float(z))
 					potential_.append(float(pot))
-			
+
 #===============================================================================================================
 #===============================================================================================================
 #Calculus of the numbers
@@ -229,11 +229,11 @@ def vacants_creation_radio(filename, probability, new_element, output_file,radio
 			fileout2.write(str(new_element[i])+ " " + str(num_atoms[i]) + " " + str(probability[i]) + " " + str(num_atoms[i]/num_atoms_total)+ "\n")
 			if (new_element[i] == "void"):
 				num_atoms_delete+=num_atoms[i]
-			
+
 			fileout2.write("\n\n")
 #===============================================================================================================
 #===============================================================================================================
-		#Print in an output File.				
+		#Print in an output File.
 		with open(output_file, "w") as fileout1:
 			#Writing number of atoms.
 			fileout1.write("LAMMPS 	coordinates with atom_style = atomic\n")
@@ -246,17 +246,17 @@ def vacants_creation_radio(filename, probability, new_element, output_file,radio
 			fileout1.write("-58.77384        58.77382 ylo yhi\n")
 			fileout1.write("0.0        893.5607 zlo zhi\n")
 			fileout1.write("\n")
-		
+
 			fileout1.write("Masses\n")
 			fileout1.write("\n")
 			fileout1.write("1 28.0855\n")
 			fileout1.write("\n")
 			fileout1.write("Atoms\n")
 			fileout1.write("\n")
-			
+
 			for aaa in range(len(x_)):
 				fileout1.write("{:8d} {} {:12.5f} {:12.5f} {:12.5f} {:12.3f} \n".format(count_[aaa],symbol_[aaa],x_[aaa],y_[aaa],z_[aaa],potential_[aaa]))
-		
+
 		return
 #===============================================================================================================
 #===============================================================================================================
@@ -273,18 +273,18 @@ def vacants_creation_gaussian(filename, probability, new_element, output_file,x0
 #...............................................................................................................
 #Security comprovations
 	#Emergency exit for total probability bigger than 1
-	if sum(probability)>1: 
+	if sum(probability)>1:
 		print("ERROR:Probability higer than 1")
 		exit() #Stop program
 #===============================================================================================================
-#Variable declaration		
+#Variable declaration
 	x_ = []
 	y_ = []
 	z_ = []
 	count_=[]
 	symbol_=[]
 	potential_=[]
-	 #Array xyz_coordinates = atomic symbol, x, y, z	
+	 #Array xyz_coordinates = atomic symbol, x, y, z
 	num_atoms = [] #Number of new_elements on the file
 	num_atoms=[0 for i in range(len(new_element))]
 	probability_calculation = []
@@ -296,7 +296,7 @@ def vacants_creation_gaussian(filename, probability, new_element, output_file,x0
 #===============================================================================================================
 #
 #===============================================================================================================
-	
+
 	#Open Filename with the original list of elements.
 	with open(filename, "r") as file:
 		#Reading the original File.
@@ -305,51 +305,51 @@ def vacants_creation_gaussian(filename, probability, new_element, output_file,x0
 			#Taking the number of atoms for the Filename
 			if line_number == 0:
 				num_atoms_total = int(line)  #Will use num_atoms afterward.
-			
-			#Taking the charge of the atoms for the Filename	
+
+			#Taking the charge of the atoms for the Filename
 			elif line_number == 1:
-				if "charge=" in line:			
-					charge = int(line.split("=")[1])		
+				if "charge=" in line:
+					charge = int(line.split("=")[1])
 				else:
 					charge = 0
-				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.		
+				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.
 			else:
 				#Reading from original File.
-				num, atomic_symbol, x, y, z, pot = line.split() 
+				num, atomic_symbol, x, y, z, pot = line.split()
 				element_change = False
 				r= np.sqrt((float(x)-x0)*(float(x)-x0)+(float(y)-y0)*(float(y)-y0))
 				random_number = amplitude*np.exp(-0.5*(r/sigma)*(r/sigma))/sigma/np.sqrt(2.0*np.pi)
-				random_number2= random.random() 
-				
+				random_number2= random.random()
+
 				for i in range(len(new_element)):
-					#Aplication of probability	
-					
-								
+					#Aplication of probability
+
+
 					if  (random_number2 <= random_number) :
 						num_atoms[i] = num_atoms[i] + 1
-						element_change = True	
-							
+						element_change = True
+
 						if new_element[i] == "void":
 							break
 						else:
 							count+=1
-							count_.append(count) 
+							count_.append(count)
 							symbol_.append(new_element[i])
 							x_.append(float(x))
 							y_.append(float(y))
 							z_.append(float(z))
 							potential_.append(float(pot))
 							break
-									
+
 				if element_change == False:
 					count+=1
-					count_.append(count) 
+					count_.append(count)
 					symbol_.append(atomic_symbol)
 					x_.append(float(x))
 					y_.append(float(y))
 					z_.append(float(z))
 					potential_.append(float(pot))
-			
+
 #===============================================================================================================
 #===============================================================================================================
 #Calculus of the numbers
@@ -360,11 +360,11 @@ def vacants_creation_gaussian(filename, probability, new_element, output_file,x0
 			fileout2.write(str(new_element[i])+ " " + str(num_atoms[i]) + " " + str(probability[i]) + " " + str(num_atoms[i]/num_atoms_total)+ "\n")
 			if (new_element[i] == "void"):
 				num_atoms_delete+=num_atoms[i]
-			
+
 			fileout2.write("\n\n")
 #===============================================================================================================
 #===============================================================================================================
-		#Print in an output File.				
+		#Print in an output File.
 		with open(output_file, "w") as fileout1:
 			#Writing number of atoms.
 			fileout1.write("LAMMPS 	coordinates with atom_style = atomic\n")
@@ -377,102 +377,18 @@ def vacants_creation_gaussian(filename, probability, new_element, output_file,x0
 			fileout1.write("-58.77384        58.77382 ylo yhi\n")
 			fileout1.write("0.0        893.5607 zlo zhi\n")
 			fileout1.write("\n")
-		
+
 			fileout1.write("Masses\n")
 			fileout1.write("\n")
 			fileout1.write("1 28.0855\n")
 			fileout1.write("\n")
 			fileout1.write("Atoms\n")
 			fileout1.write("\n")
-			
+
 			for aaa in range(len(x_)):
 				fileout1.write("{:8d} {} {:12.5f} {:12.5f} {:12.5f} {:12.3f} \n".format(count_[aaa],symbol_[aaa],x_[aaa],y_[aaa],z_[aaa],potential_[aaa]))
-		
-		return
-#===============================================================================================================
-#===============================================================================================================
-#===============================================================================================================
-#===============================================================================================================
-#===============================================================================================================
-def vacants_obtained (file_name,num_file):
-	new_element=[]
-	probabilities=[]
-	boolean=False
-	count=0
-	with open(file_name, "r") as file_:
-		for line in file_:
-		
-			if int(num_file)==count:
-				boolean=True
-			
-			if line=="\n" or line=="end\n":
-				count+=1
-				
-			if boolean == True:
-				aux = line.split()
-				
-				if len(aux) == 2:
-					element, probability = aux 
-				
-					new_element.append(str(element))
-					probabilities.append(float(probability))
-				
-				if line=="end\n" or line=="\n":
-				
-					return  new_element, probabilities;
-					
-def vacants_obtained_radio (file_name,num_file):
-	new_element=[]
-	probabilities=[]
-	radios=[]
-	boolean=False
-	count=0
-	with open(file_name, "r") as file_:
-		for line in file_:
-		
-			if int(num_file)==count:
-				boolean=True
-			
-			if line=="\n" or line=="end\n":
-				count+=1
-				
-			if boolean == True:
-				aux = line.split()
-				
-				if len(aux) == 3:
-					element, probability, radio = aux 
-				
-					new_element.append(str(element))
-					probabilities.append(float(probability))
-					radios.append(float(radio))
-				
-				if line=="end\n" or line=="\n":
-				
-					return  new_element, probabilities, radios;
-					
-def vacants_obtained_number (file_name,num_file):
-	boolean=False
-	count=0
-	with open(file_name, "r") as file_:
-		for line in file_:
-		
-			if int(num_file)==count:
-				boolean=True
-			
-			if line=="\n" or line=="end\n":
-				count+=1
-				
-			if boolean == True:
-				aux = line.split()
-				
-				if len(aux) == 2:
-					element, probability = aux 
-					
-				
-				if line=="end\n" or line=="\n":
-				
-					return  probability
 
+		return
 #===============================================================================================================
 #===============================================================================================================
 #...............................................................................................................
@@ -480,19 +396,19 @@ def vacants_creation_number(filename, number_new_atoms, output_file):
 #...............................................................................................................
 #Security comprovations
 #===============================================================================================================
-#Variable declaration	
-	inside=[]	
+#Variable declaration
+	inside=[]
 	x_ = []
 	y_ = []
 	z_ = []
 
 	symbol_=[]
 	potential_=[]
-	
+
 #===============================================================================================================
 #
 #===============================================================================================================
-	
+
 	#Open Filename with the original list of elements.
 	with open(filename, "r") as file:
 		#Reading the original File.
@@ -501,34 +417,34 @@ def vacants_creation_number(filename, number_new_atoms, output_file):
 			#Taking the number of atoms for the Filename
 			if line_number == 0:
 				num_atoms_total = int(line)  #Will use num_atoms afterward.
-			
-			#Taking the charge of the atoms for the Filename	
+
+			#Taking the charge of the atoms for the Filename
 			elif line_number == 1:
-				if "charge=" in line:			
-					charge = int(line.split("=")[1])		
+				if "charge=" in line:
+					charge = int(line.split("=")[1])
 				else:
 					charge = 0
-				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.		
+				# Reading atoms with a 1-probability. Note that is the same that delete atoms with a probability.
 			else:
 				#Reading from original File.
-				num, atomic_symbol, x, y, z, pot = line.split() 
-				
+				num, atomic_symbol, x, y, z, pot = line.split()
+
 				count+=1
 				symbol_.append(atomic_symbol)
 				x_.append(float(x))
 				y_.append(float(y))
 				z_.append(float(z))
 				potential_.append(float(pot))
-				inside.append(True)				
-	
+				inside.append(True)
+
 	random_sample = random.sample(range(count), int(number_new_atoms))
-	
-	
+
+
 	for rand_num in random_sample:
 
 		inside[rand_num]=False
-				
-	#Print in an output File.				
+
+	#Print in an output File.
 	with open(output_file, "w") as fileout1:
 		#Writing number of atoms.
 		fileout1.write("LAMMPS 	coordinates with atom_style = atomic\n")
@@ -537,24 +453,24 @@ def vacants_creation_number(filename, number_new_atoms, output_file):
 		fileout1.write("\n")
 		fileout1.write(" 1 atom types\n")
 		fileout1.write("\n")
-		fileout1.write("-59.91928        59.91926 xlo xhi\n")
-		fileout1.write("-58.77384        58.77382 ylo yhi\n")
-		fileout1.write("0.0        1495.53841 zlo zhi\n")
+		fileout1.write("-69.91928        69.91926 xlo xhi\n")
+		fileout1.write("-68.77384        68.77382 ylo yhi\n")
+		fileout1.write("0.0        2699.49386 zlo zhi\n")
 		fileout1.write("\n")
-		
+
 		fileout1.write("Masses\n")
 		fileout1.write("\n")
 		fileout1.write("1 28.0855\n")
 		fileout1.write("\n")
 		fileout1.write("Atoms\n")
 		fileout1.write("\n")
-			
+
 		step=0
 		for aaa in range(len(x_)):
 			if inside[aaa] == True:
 				step+=1
 				fileout1.write("{:8d} {} {:12.5f} {:12.5f} {:12.5f} {:12.3f} \n".format(step,symbol_[aaa],x_[aaa],y_[aaa],z_[aaa],potential_[aaa]))
-	
+
 #===============================================================================================================
 #===============================================================================================================
 #===============================================================================================================

@@ -1,6 +1,0 @@
-{"action" : "vacants",
-"input" : "input/pure.sinw", 
-"output" : "nano_data.sinw",
-"probabilities_file" : "input/probabilities.txt",
-"num_files": "100"
-}	
