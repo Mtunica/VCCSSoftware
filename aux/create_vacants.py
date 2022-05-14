@@ -64,7 +64,7 @@ def create_vacants_gaussian (probabilities_file, input_file, output_file,num_fil
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
-def create_vacants_gaussian_number(probabilities_file, input_file, output_file,num_files,sigma, amplitude,length):
+def create_vacants_gaussian_number(probabilities_file, input_file, output_file,num_files,sigma, amplitude,length,max_count):
 
 	#Time computing
 	start = timeit.default_timer()
@@ -75,7 +75,7 @@ def create_vacants_gaussian_number(probabilities_file, input_file, output_file,n
 	print("x0:", x0, "y0:", y0)
 	for i in range(num_files):
 		num = vacants_obtained_number(probabilities_file,i)
-		vacants_gaussian_number(input_file, num, "output/"+str(i)+output_file,x0,y0,sigma,amplitude,length)
+		vacants_gaussian_number(input_file, num, "output/"+str(i)+output_file,x0,y0,sigma,amplitude,length,max_count)
 
 
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
