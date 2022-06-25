@@ -1,6 +1,6 @@
 {"action" : "vacants radio",
-"input" : "input/pure.sinw", 
+"input" : "input/pure_90.sinw",
 "output" : "nano_data_radio.sinw",
 "probabilities_file" : "input/probabilities_radio.txt",
-"num_files": "5"
-}	
+"num_files": "3"
+}

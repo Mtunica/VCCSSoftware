@@ -116,5 +116,5 @@ def comprare_xyz_file(filename1,filename2,filename_out):
 	#plt.plot(v,gaussian_function(v,1.0))
 	plt.ylabel("Frequency")
 	plt.xlabel("Distance from the center in Angstroms")
-	n, bins, patches = ax1.hist(v_hist,bins=500, density=False, stacked=False, facecolor='black')
+	n, bins, patches = ax1.hist(v_hist,bins=7, range=[0,25],density=False, stacked=False, facecolor='black')
 	plt.savefig(filename_out+"image.png")

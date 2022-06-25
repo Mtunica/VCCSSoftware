@@ -56,7 +56,7 @@ fig = plt.figure()
 ax1 = fig.add_subplot(111)
 
 
-n, bins, patches = ax1.hist(v_hist, bins=500, density=False, stacked=False, facecolor='black')
+n, bins, patches = ax1.hist(v_hist, bins=7, density=False, stacked=True, facecolor='green')
 plt.ylabel("Frequency")
 plt.xlabel("Distance from the center in Angstroms")
 plt.savefig(filename_out+"image.png")

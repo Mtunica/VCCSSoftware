@@ -4,10 +4,13 @@ from aux.obtained.obtained_vacants import vacants_obtained
 from aux.vacants import vacants_creation_gaussian
 from aux.vacants import vacants_creation_radio
 from aux.obtained.obtained_vacants import vacants_obtained_radio
-from aux.vacants import vacants_creation_number
+from aux.vacancies.uniform_number import vacants_creation_number
 from aux.obtained.obtained_vacants import vacants_obtained_number
-from aux.gaussian_number import vacants_gaussian_number
-
+from aux.vacancies.gaussian_number import vacants_gaussian_number
+from aux.vacancies.radio import vacants_radio_number
+from aux.vacancies.semiradio import vacants_semiradio_number
+from aux.vacancies.antiradio import vacants_antiradio_number
+from aux.vacancies.antisemiradio import vacants_antisemiradio_number
 
 from aux.mu import compute_mu
 
@@ -87,6 +90,95 @@ def create_vacants_gaussian_number(probabilities_file, input_file, output_file,n
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
+def create_vacants_radio_number(probabilities_file, input_file, output_file,num_files,radio,length):
+
+	#Time computing
+	start = timeit.default_timer()
+
+	#Define element and probabilities vector
+
+	x0,y0=compute_mu(input_file)
+	print("x0:", x0, "y0:", y0)
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+		vacants_radio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,length)
+
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
+
+	#Time computing
+	stop = timeit.default_timer()
+	print('Time: ', stop - start)
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+def create_vacants_semiradio_number(probabilities_file, input_file, output_file,num_files,radio,midle,length):
+
+	#Time computing
+	start = timeit.default_timer()
+
+	#Define element and probabilities vector
+
+	x0,y0=compute_mu(input_file)
+	print("x0:", x0, "y0:", y0)
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+		vacants_semi_radio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,midle,length)
+
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
+
+	#Time computing
+	stop = timeit.default_timer()
+	print('Time: ', stop - start)	
+
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+def create_vacants_antiradio_number(probabilities_file, input_file, output_file,num_files,radio,length):
+
+	#Time computing
+	start = timeit.default_timer()
+
+	#Define element and probabilities vector
+
+	x0,y0=compute_mu(input_file)
+	print("x0:", x0, "y0:", y0)
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+		vacants_antiradio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,length)
+
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
+
+	#Time computing
+	stop = timeit.default_timer()
+	print('Time: ', stop - start)
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+def create_vacants_semiantiradio_number(probabilities_file, input_file, output_file,num_files,radio,midle,length):
+
+	#Time computing
+	start = timeit.default_timer()
+
+	#Define element and probabilities vector
+
+	x0,y0=compute_mu(input_file)
+	print("x0:", x0, "y0:", y0)
+	for i in range(num_files):
+		num = vacants_obtained_number(probabilities_file,i)
+		vacants_semi_antiradio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,midle,length)
+
+
+		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
+		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element"+str(i)+".xyz" )
+
+	#Time computing
+	stop = timeit.default_timer()
+	print('Time: ', stop - start)
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
 def create_vacants_radio(probabilities_file, input_file, output_file,num_files):
 
 	#We want to compute time as well
@@ -111,7 +203,7 @@ def create_vacants_radio(probabilities_file, input_file, output_file,num_files):
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
-def create_vacants_number(probabilities_file, input_file, output_file,num_files):
+def create_vacants_number(probabilities_file, input_file, output_file,num_files,length):
 
 	#We want to compute time as well
 	start = timeit.default_timer()
@@ -119,7 +211,7 @@ def create_vacants_number(probabilities_file, input_file, output_file,num_files)
 	for i in range(num_files):
 		num = vacants_obtained_number(probabilities_file,i)
 
-		vacants_creation_number(input_file, num, "output/"+str(i)+output_file)
+		vacants_creation_number(input_file, num, "output/"+str(i)+output_file,length)
 
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")
 		comprare_xyz_file("output/"+str(i)+output_file,input_file,"output/element_number_"+str(i)+".xyz" )

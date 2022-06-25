@@ -4,6 +4,6 @@
 "probabilities_file" : "input/probabilities/probabilities.txt",
 "num_files": "100",
 "mean": "100",
-"sigma": "10",
+"sigma": "15",
 "amplitude": "0.8"
 }
