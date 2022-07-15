@@ -7,7 +7,7 @@
 
 ---
 
-<p align="center">     <br> 
+<p align="center">     <br>
 </p>
 ## Table of Contents
 
@@ -19,9 +19,13 @@
 	+ [Output files and plots](#outputs)
 - [Operations](#operations)
 	+ [Uniform vacancies approximated to a percentage](#uniform)
-	+ [Uniform distribution of a particular number of vacancies](#number)
-	+ [Gaussian radial distribution](#gaussian)
-	+ [Uniform vacancies approximated to a percentage concentrated in a particular radius](#radius)
+	+ [Uniform distribution of a particular number of vacancies](#Uniform Number)
+	+ [Gaussian radial distribution](#Gaussian)
+	+ [Gaussian radial distribution  of a particular number of vacancies](#Gaussian Number)
+	+ [Uniform vacancies approximated to a percentage concentrated in a particular radius](#Radius)
+	+ [Uniform vacancies of a particular number of vacancies concentrated in a particular radius](#Radius number)
+	+ [Uniform vacancies of a particular number of vacancies concentrated outside a particular radius](#AntiRadius Number)
+	+ [Uniform vacancies of a particular number of vacancies in a ring](#Semi Radius Number)
 - [TODO](#todo)
 - [Authors](#authors)
 
@@ -30,9 +34,9 @@
 ### Make file <a name = "make"></a>
 ### Aux <a name = "aux"></a>
 
-Aux is a folder which contains the functions and modules of the code. 
+Aux is a folder which contains the functions and modules of the code.
 
-#### vacants.py 
+#### vacants.py
 
 The file **vacants.py** contains the following functions for generating the vacancies:
 
@@ -58,13 +62,13 @@ The file **vacants.py** contains the following functions to read the probabiliti
 
 #### compare\_xyz\_file.py
 
-#### compute\_radio\_prob.py 
+#### compute\_radio\_prob.py
 #### create\_vacants.py
 #### create\_xyz\_file.py
-#### mu.py 
+#### mu.py
 
 Given a coordinates file of a nanowire along z, computes the x,y center.
-* **create\_material.py** : In process... 
+* **create\_material.py** : In process...
 
 
 ### Inputs <a name = "inputs"></a>
@@ -82,11 +86,11 @@ This is a program to generate the vacants given an input file (example in folder
 
 #### Input file
 
-There are two input files. 
+There are two input files.
 
 1. **vacants.json**: It contains the following parameters:
 	* **action**: Always vacants
-	* **input**: The input file of coordinates. 
+	* **input**: The input file of coordinates.
 	* **output**: name of the output_file
 	* **probabilities_file**: Link to the probabilities file.
 	* **num_files**: Number of probabilities of probabilities file.
@@ -105,11 +109,11 @@ To execute, write in terminal ``` make  uniform``` .
 
 #### Input file
 
-There are two input files. 
+There are two input files.
 
 1. **vacants_number.json**: It contains the following parameters:
 	* **action**: Always vacants number
-	* **input**: The input file of coordinates. 
+	* **input**: The input file of coordinates.
 	* **output**: name of the output_file
 	* **probabilities_file**: Link to the probabilities file.
 	* **num_files**: Number of probabilities of probabilities file.
@@ -129,11 +133,11 @@ To execute, write in terminal ``` make  number``` .
 
 #### Input file
 
-There are two input files. 
+There are two input files.
 
 1. **vacants_gauss.json**: It contains the following parameters:
 	* **action**: Always vacants gauss
-	* **input**: The input file of coordinates. 
+	* **input**: The input file of coordinates.
 	* **output**: name of the output_file
 	* **probabilities_file**: Link to the probabilities file.
 	* **num_files**: Number of probabilities of probabilities file.
@@ -156,11 +160,11 @@ To execute, write in terminal ``` make  gaussian``` .
 
 #### Input file
 
-There are two input files. 
+There are two input files.
 
 1. **vacants_gauss.json**: It contains the following parameters:
 	* action: Always vacants gauss
-	* input: The input file of coordinates. 
+	* input: The input file of coordinates.
 	* output: name of the output_file
 	* probabilities_file: Link to the probabilities file.
 	* num_files: Number of probabilities of probabilities file.

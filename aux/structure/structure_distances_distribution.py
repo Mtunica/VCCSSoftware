@@ -52,11 +52,14 @@ with open(filename_out) as f:
 
 
 v_hist = np.ravel(v)   # 'flatten' v
-fig = plt.figure()
+fig = plt.figure(figsize=(10,5))
 ax1 = fig.add_subplot(111)
 
 
-n, bins, patches = ax1.hist(v_hist, bins=7, density=False, stacked=True, facecolor='green')
-plt.ylabel("Frequency")
-plt.xlabel("Distance from the center in Angstroms")
+n, bins, patches = ax1.hist(v_hist, bins=7	, density=True, stacked=True, alpha=0.5,facecolor='green')
+plt.ylabel("Frequency over 1",fontsize=18)
+plt.xlabel("Distance from the centre ($\AA$)",fontsize=18)
+plt.tight_layout() 
 plt.savefig(filename_out+"image.png")
+
+

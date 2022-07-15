@@ -1,10 +1,10 @@
 {"action" : "vacants gauss number",
-"input" : "input/pure_180.sinw",
+"input" : "input/pure_90.sinw",
 "output" : "nano_data_gauss_number.sinw",
 "probabilities_file" : "input/probabilities/probabilities_number.txt",
-"num_files": "4",
-"sigma": "1.0",
-"amplitude": "20.0",
-"length": "1796.52728",
+"num_files": "3",
+"sigma": "17.0",
+"amplitude": "10.0",
+"length": "893.5607",
 "count": "20"
 }

@@ -123,7 +123,7 @@ def create_vacants_semiradio_number(probabilities_file, input_file, output_file,
 	print("x0:", x0, "y0:", y0)
 	for i in range(num_files):
 		num = vacants_obtained_number(probabilities_file,i)
-		vacants_semi_radio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,midle,length)
+		vacants_semiradio_number(input_file, num, "output/"+str(i)+output_file,x0,y0,radio,midle,length)
 
 
 		create_xyz_file("output/"+str(i)+output_file,"output/"+str(i)+".xyz")

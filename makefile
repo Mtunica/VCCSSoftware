@@ -32,8 +32,8 @@ number_antiradio: main.py $(dir_input)/vacants_antiradio_number.json output
 number_semi_radio: main.py $(dir_input)/vacants_semiradio_number.json output
 	python3 main.py $(dir_input)/vacants_semiradio_number.json
 
-## 9. number_semi_radio:
-number_semi_radio: main.py $(dir_input)/vacants_antisemiradio_number.json output
+## 9. number_anti_semi_radio:
+number_anti_semi_radio: main.py $(dir_input)/vacants_antisemiradio_number.json output
 	python3 main.py $(dir_input)/vacants_antisemiradio_number.json
 
 output:

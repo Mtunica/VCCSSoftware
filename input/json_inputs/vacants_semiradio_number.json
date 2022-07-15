@@ -1,9 +1,9 @@
 {"action" : "vacants semi radio number",
-"input" : "input/pure_150.sinw",
-"output" : "nano_data_radio_number.sinw",
+"input" : "input/pure_90.sinw",
+"output" : "nano_data_semi_radio_number.sinw",
 "probabilities_file" : "input/probabilities/probabilities_number.txt",
 "num_files": "3",
-"radio": "20.0",
+"radio": "5.0",
 "distance": "12.5",
-"length": "1495.53841"
+"length": "1796.52728"
 }
