@@ -70,55 +70,126 @@ The file **vacants.py** contains the following functions to read the probabiliti
 Given a coordinates file of a nanowire along z, computes the x,y center.
 * **create\_material.py** : In process...
 
-
 ### Inputs <a name = "inputs"></a>
 
+There are two input files.
+
+1. **Json inputs**
+
+   1. **vacants_gauss.json**: 
+
+      1. action: Always vacants gauss
+
+      ​	2. input: The input file of coordinates.
+
+      ​	3. output: name of the output_file
+
+      ​	4. probabilities_file: Link to the probabilities file.
+
+      ​	5. num_files: Number of probabilities of probabilities file.
+
+       	7. sigma:
+
+   2. **vacants.json:**
+
+      1.  action: Always vacants gauss
+
+      2. input: The input file of coordinates.
+
+      3. output: name of the output_file
+
+      4.  probabilities_file: Link to the probabilities file.
+
+      5. num_files: Number of probabilities of probabilities file.
+
+   3. **vacants_gauss_number.json:** 
+
+      1. action: Always vacants gauss number
+
+      ​	2. input: The input file of coordinates.
+
+      ​	3. output: name of the output_file
+
+      ​	4. probabilities_file: Link to the probabilities file.
+
+      ​	5. num_files: Number of probabilities of probabilities file.
+
+       	7. sigma:
+
+      8. length: length of the nanowire to write for LAMMPS.
+      9. count: Number of times it is accepted.
+
+   4. **vacants_radio_number.json:**
+
+      1.  action: Always vacants radio number
+      2. input: The input file of coordinates.
+      3. output: name of the output_file
+      4.  probabilities_file: Link to the probabilities file.
+      5. num_files: Number of probabilities of probabilities file.
+      6. radio: The radius of the cylinder.
+      7. length: length of the nanowire to write for LAMMPS.
+
+   5. **vacants_radio.json:**
+
+      1. action: Always vacants radio
+
+      ​	2. input: The input file of coordinates.
+
+      ​	3. output: name of the output_file
+
+      ​	4. probabilities_file: Link to the probabilities file.
+
+      ​	5. num_files: Number of probabilities of probabilities file.
+
+   6. **vacants_semiradio_number.json:**
+
+      1.  action: Always vacants semi radio number
+      2. input: The input file of coordinates.
+      3. output: name of the output_file
+      4.  probabilities_file: Link to the probabilities file.
+      5. num_files: Number of probabilities of probabilities file.
+      6. radio: The thickness of the ring.
+      7. distance: Average radius of the ring
+      8. length: length of the nanowire to write for LAMMPS.
+
+   7. **vacants_antiradio_number.json:**
+
+      1.  action: Always vacants anti radio number
+      2. input: The input file of coordinates.
+      3. output: name of the output_file
+      4.  probabilities_file: Link to the probabilities file.
+      5. num_files: Number of probabilities of probabilities file.
+      6. radio: The radius of the cylinder.
+      7. length: length of the nanowire to write for LAMMPS.
+
+   8. **vacants_antisemiradio_number.json:**
+
+      1.  action: Always vacants antisemi radio number
+      2. input: The input file of coordinates.
+      3. output: name of the output_file
+      4.  probabilities_file: Link to the probabilities file.
+      5. num_files: Number of probabilities of probabilities file.
+      6. radio: The thickness of the ring.
+      7. distance: Average radius of the ring
+      8. length: length of the nanowire to write for LAMMPS.
+
+2. **Probabilities Folder**
+
+   1. **probabilities:** The list of percentages of vacancies. the format is: ```element percentage``` . At the end of the file, add ```end```.
+   2. **probabilities_number**: The list of number of vacancies. the format is: ```element number of vacancies``` . At the end of the file, add ```end```
+   3. **probabilities_radio**:  
+
 ### Outputs <a name = "outputs"></a>
+
+1. data.xyz containing the nanowire without the deleted atoms.
+2. element.xyz containing the vacancies with letter B and the atoms with letter A.
+3. Histogram of the vacancies. 
 
 
 ## Operations <a name = "operations"></a>
 
 This is a program to generate the vacants given an input file (example in folder input, pure.xyz). It reads a json input file (example in vacants.json) and creates the probabilities from input file probabilities (example in input folder).
 
-
-
-### Create vacancies random uniform with an approximated probability <a name = "uniform"></a>
-
-#### Input file
-
-There are two input files.
-
-1. **vacants.json**: It contains the following parameters:
-	* **action**: Always vacants
-	* **input**: The input file of coordinates.
-	* **output**: name of the output_file
-	* **probabilities_file**: Link to the probabilities file.
-	* **num_files**: Number of probabilities of probabilities file.
-
-2. **probabilities**: The list of percentages of vacancies. the format is: ```element percentage``` . At the end of the file, add ```end```.
-
-
-#### Execution
-
-
-To execute, write in terminal ``` make  uniform``` .
-
-
-### Create a particular number of vacancies<a name = "number"></a>
-
-
-#### Input file
-
-There are two input files.
-
-1. **vacants_number.json**: It contains the following parameters:
-	* **action**: Always vacants number
-	* **input**: The input file of coordinates.
-	* **output**: name of the output_file
-	* **probabilities_file**: Link to the probabilities file.
-	* **num_files**: Number of probabilities of probabilities file.
-
-2. **probabilities_number**: The list of percentages of vacancies. the format is: ```element number of vacancies``` . At the end of the file, add ```end```.
 
 
 ### Execution
@@ -128,63 +199,9 @@ To execute, write in terminal ``` make  number``` .
 
 
 
-### Create vacancies following a radial Gaussian distribution<a name = "gaussian"></a>
-
-
-#### Input file
-
-There are two input files.
-
-1. **vacants_gauss.json**: It contains the following parameters:
-	* **action**: Always vacants gauss
-	* **input**: The input file of coordinates.
-	* **output**: name of the output_file
-	* **probabilities_file**: Link to the probabilities file.
-	* **num_files**: Number of probabilities of probabilities file.
-	* **mean**:
-	* **sigma**:
-	* **amplitude**:
-
-2. **probabilities_number**: The list of percentages of vacancies. the format is: ```element number of vacancies``` . At the end of the file, add ```end```.
-
-
-
-### Execution
-
-To execute, write in terminal ``` make  gaussian``` .
-
-
-
-
-### Create vacancies randomly approximated to a percentage in a particular radius.  <a name = "radio"></a>
-
-#### Input file
-
-There are two input files.
-
-1. **vacants_gauss.json**: It contains the following parameters:
-	* action: Always vacants gauss
-	* input: The input file of coordinates.
-	* output: name of the output_file
-	* probabilities_file: Link to the probabilities file.
-	* num_files: Number of probabilities of probabilities file.
-	* mean:
-	* sigma:
-	* amplitude:
-
-2. **probabilities_number**: The list of percentages of vacancies. the format is: ```element number of vacancies``` . At the end of the file, add ```end```.
-
-
-#### Execution
-
-To execute, write in terminal ``` make  radio``` .
-
-
-
 ## ToDo <a name = "todo"></a>
 
 * Optimise
 * Finish readme
-* Add radio+number
 
 ## Authors
