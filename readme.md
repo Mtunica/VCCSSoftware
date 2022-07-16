@@ -1,7 +1,7 @@
 <h1 align="center">VCCS-Software</h1>
 
 <div align="center">
-
+This is a program to generate the vacants given an input file (example in folder input, pure.xyz). It reads a json input file (example in vacants.json) and creates the probabilities from input file probabilities (example in input folder).
 
 </div>
 
@@ -17,21 +17,29 @@
 	+ [Aux](#aux)
 	+ [Input parameters](#inputs)
 	+ [Output files and plots](#outputs)
-- [Operations](#operations)
-	+ [Uniform vacancies approximated to a percentage](#uniform)
-	+ [Uniform distribution of a particular number of vacancies](#Uniform Number)
-	+ [Gaussian radial distribution](#Gaussian)
-	+ [Gaussian radial distribution  of a particular number of vacancies](#Gaussian Number)
-	+ [Uniform vacancies approximated to a percentage concentrated in a particular radius](#Radius)
-	+ [Uniform vacancies of a particular number of vacancies concentrated in a particular radius](#Radius number)
-	+ [Uniform vacancies of a particular number of vacancies concentrated outside a particular radius](#AntiRadius Number)
-	+ [Uniform vacancies of a particular number of vacancies in a ring](#Semi Radius Number)
+	+ [Execution](#execution)
 - [TODO](#todo)
 - [Authors](#authors)
 
 ## Structure of the code <a name = "structure"></a>
 ### Main <a name = "main"></a>
+
+The main file reads the action of the input json file, which is introduced via argument when executing the code. Then it selects the relevant parameters according to the action we want to implement.
+
 ### Make file <a name = "make"></a>
+
+Tha make file contains a serie of predeterminated actions with the predeterminated json files located in the input folder.
+
+1. **uniform:** 
+2. **gaussian:** 
+3. **radio:**
+4. **number_uniform_:** 
+5. **number_gauss:**
+6. **number_radio:**
+7. **number_antiradio:**
+8. **number_semi_radio:**
+9. **number_anti_semi_radio:** 
+
 ### Aux <a name = "aux"></a>
 
 Aux is a folder which contains the functions and modules of the code.
@@ -40,35 +48,63 @@ Aux is a folder which contains the functions and modules of the code.
 
 The file **vacants.py** contains the following functions for generating the vacancies:
 
-* **vacants\_creation\_xyz(filename, probability, new\_element, output\_file)**: [Uniform distribution](#uniform) of the vacancies.
+* **vacants\_creation\_xyz(filename, probability, new\_element, output\_file)**: Uniform distribution of the vacancies.
 
-* **vacants\_creation\_radio(filename, probability, new\_element, output\_file,radio,x0,y0)**: [Uniform distribution in a given radio](#radio) of the vacancies.
-
-
-* **vacants\_creation\_gaussian(filename, probability, new\_element, output\_file,x0,y0,sigma,amplitude)**: [Gaussian distribution](#gaussian) of the vacancies.
+* **vacants\_creation\_radio(filename, probability, new\_element, output\_file,radio,x0,y0)**: Uniform distribution in a given radio of the vacancies.
 
 
-* **vacants\_creation\_number(filename, number\_new\_atoms, output\_file)**:  [Uniform distribution given a particular number](#number) of the vacancies.
+* **vacants\_creation\_gaussian(filename, probability, new\_element, output\_file,x0,y0,sigma,amplitude)**: Gaussian distribution of the vacancies.
 
-The file **vacants.py** contains the following functions to read the probabilities files:
+#### vacancies/antiradio.py
 
-* **vacants\_obtained (file_name,num\_file)**:
+* **vacants_antiradio_number(filename, number_new_atoms, output_file,x0,y0,radius,length)**: "This function generates vacancies inside a particular radius considering a specific number of Vacancies.
 
-* **vacants\_obtained\_radio (file\_name,num_file):**
+#### vacancies/antisemiradio.py
+
+* **vacants_antisemiradio_number(filename, number_new_atoms, output_file,x0,y0,radius,middle_radius,length)**: This function generates vacancies inside a particular radius considering a specific number of Vacancies.
+
+#### vacancies/radio.py
+
+* **vacants_radio_number(filename, number_new_atoms, output_file,x0,y0,radius,length)**:  This function generates vacancies inside a particular radius considering a specific number of Vacancies. 
+
+#### vacancies/semiradio.py
+
+* **vacants_semiradio_number(filename, number_new_atoms, output_file,x0,y0,radius,middle_radius,length)**: This function generates vacancies inside a particular radius considering a specific number of Vacancies. 
+
+#### vacancies/uniform_number.py
+
+* **vacants_creation_number(filename, number_new_atoms, output_file,length)**: This function creates a uniform distribution given a particular number of the vacancies.
+
+ #### obtained_vacants.py
+
+The following functions aim to read the probabilities files:
+
+* **vacants\_obtained (file_name,num\_file)**: Return element and probability.
+
+* **vacants\_obtained\_radio (file\_name,num_file):** Return element, probability and radius.
 
 
-* **vacants\_obtained\_number (file\_name,num_file):**
+* **vacants\_obtained\_number (file\_name,num_file):** Return number of vacancies.
 
 
-#### compare\_xyz\_file.py
 
-#### compute\_radio\_prob.py
 #### create\_vacants.py
-#### create\_xyz\_file.py
+
+All this functions are the coordinator between the obtained vacancies file and the creation functions.
+
+* **create_vacants (probabilities_file, input_file, output_file,num_files)**
+* **create_vacants_gaussian (probabilities_file, input_file, output_file,num_files,sigma, amplitude)**
+* **create_vacants_gaussian_number(probabilities_file, input_file, output_file,num_files,sigma, amplitude,length,max_count)**:
+* **create_vacants_radio_number(probabilities_file, input_file, output_file,num_files,radio,length)**:
+* **create_vacants_semiradio_number(probabilities_file, input_file, output_file,num_files,radio,midle,length)**
+* **create_vacants_antiradio_number(probabilities_file, input_file, output_file,num_files,radio,length)** 
+* **create_vacants_semiantiradio_number(probabilities_file, input_file, output_file,num_files,radio,midle,length)**
+*  **create_vacants_radio(probabilities_file, input_file, output_file,num_files)** 
+* **create_vacants_number(probabilities_file, input_file, output_file,num_files,length)** 
+
 #### mu.py
 
-Given a coordinates file of a nanowire along z, computes the x,y center.
-* **create\_material.py** : In process...
+* **compute_mu(filename)**: Given a coordinates file of a nanowire along z, computes the x,y center.
 
 ### Inputs <a name = "inputs"></a>
 
@@ -76,7 +112,33 @@ There are two input files.
 
 1. **Json inputs**
 
-   1. **vacants_gauss.json**: 
+   1. **vacants.json:**
+
+      1.  action: Always vacants
+
+      2.  input: The input file of coordinates.
+
+      3.  output: name of the output_file
+
+      4.  probabilities_file: Link to the probabilities file.
+
+      5.  num_files: Number of probabilities of probabilities file.
+
+   2. **vacants_number.json:**
+
+      1.  action: Always vacants
+
+      2.  input: The input file of coordinates.
+
+      3.  output: name of the output_file
+
+      4.  probabilities_file: Link to the probabilities file.
+
+      5.  num_files: Number of probabilities of probabilities file.
+
+      6.  length: length of the nanowire to write for LAMMPS.
+
+   3. **vacants_gauss.json**: 
 
       1. action: Always vacants gauss
 
@@ -86,23 +148,10 @@ There are two input files.
 
       ​	4. probabilities_file: Link to the probabilities file.
 
-      ​	5. num_files: Number of probabilities of probabilities file.
+      	5. num_files: Number of probabilities of probabilities file.
+      	5. sigma: Standard deviation
 
-       	7. sigma:
-
-   2. **vacants.json:**
-
-      1.  action: Always vacants gauss
-
-      2. input: The input file of coordinates.
-
-      3. output: name of the output_file
-
-      4.  probabilities_file: Link to the probabilities file.
-
-      5. num_files: Number of probabilities of probabilities file.
-
-   3. **vacants_gauss_number.json:** 
+   4. **vacants_gauss_number.json:** 
 
       1. action: Always vacants gauss number
 
@@ -112,14 +161,12 @@ There are two input files.
 
       ​	4. probabilities_file: Link to the probabilities file.
 
-      ​	5. num_files: Number of probabilities of probabilities file.
+      	5. num_files: Number of probabilities of probabilities file.
+      	5. sigma: Standard deviation
+      	5. length: length of the nanowire to write for LAMMPS.
+      	5. count: Number of times it is accepted.
 
-       	7. sigma:
-
-      8. length: length of the nanowire to write for LAMMPS.
-      9. count: Number of times it is accepted.
-
-   4. **vacants_radio_number.json:**
+   5. **vacants_radio_number.json:**
 
       1.  action: Always vacants radio number
       2. input: The input file of coordinates.
@@ -129,7 +176,7 @@ There are two input files.
       6. radio: The radius of the cylinder.
       7. length: length of the nanowire to write for LAMMPS.
 
-   5. **vacants_radio.json:**
+   6. **vacants_radio.json:**
 
       1. action: Always vacants radio
 
@@ -141,7 +188,7 @@ There are two input files.
 
       ​	5. num_files: Number of probabilities of probabilities file.
 
-   6. **vacants_semiradio_number.json:**
+   7. **vacants_semiradio_number.json:**
 
       1.  action: Always vacants semi radio number
       2. input: The input file of coordinates.
@@ -152,7 +199,7 @@ There are two input files.
       7. distance: Average radius of the ring
       8. length: length of the nanowire to write for LAMMPS.
 
-   7. **vacants_antiradio_number.json:**
+   8. **vacants_antiradio_number.json:**
 
       1.  action: Always vacants anti radio number
       2. input: The input file of coordinates.
@@ -162,7 +209,7 @@ There are two input files.
       6. radio: The radius of the cylinder.
       7. length: length of the nanowire to write for LAMMPS.
 
-   8. **vacants_antisemiradio_number.json:**
+   9. **vacants_antisemiradio_number.json:**
 
       1.  action: Always vacants antisemi radio number
       2. input: The input file of coordinates.
@@ -185,14 +232,7 @@ There are two input files.
 2. element.xyz containing the vacancies with letter B and the atoms with letter A.
 3. Histogram of the vacancies. 
 
-
-## Operations <a name = "operations"></a>
-
-This is a program to generate the vacants given an input file (example in folder input, pure.xyz). It reads a json input file (example in vacants.json) and creates the probabilities from input file probabilities (example in input folder).
-
-
-
-### Execution
+### Execution<a name = "execution"></a>
 
 
 To execute, write in terminal ``` make  number``` .
